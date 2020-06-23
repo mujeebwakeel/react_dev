@@ -48,7 +48,7 @@ const data = {
         {
             _id: "6",
             name: "Slim Shirt",
-            image: "/img/img-18.jpg",
+            image: "/img/img-13.jpg",
             price: 43,
             brand: "Gucci",
             rating: 4.7,
