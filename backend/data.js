@@ -7,7 +7,8 @@ const data = {
             price: 40,
             brand: "Gucci",
             rating: 4.7,
-            numReviews: 16
+            numReviews: 16,
+            countInStock: 3
         },
         {
             _id: "2",
@@ -16,7 +17,8 @@ const data = {
             price: 60,
             brand: "Nike",
             rating: 4.5,
-            numReviews: 11
+            numReviews: 11,
+            countInStock: 10
         },
         {
             _id: "3",
@@ -25,7 +27,8 @@ const data = {
             price: 29,
             brand: "Versace",
             rating: 6.3,
-            numReviews: 13
+            numReviews: 13,
+            countInStock: 9
         },
         {
             _id: "4",
@@ -34,7 +37,8 @@ const data = {
             price: 90,
             brand: "Gucci",
             rating: 4.0,
-            numReviews: 14
+            numReviews: 14,
+            countInStock: 8
         },
         {
             _id: "5",
@@ -43,7 +47,8 @@ const data = {
             price: 35,
             brand: "Nike",
             rating: 3.7,
-            numReviews: 6
+            numReviews: 6,
+            countInStock: 5
         },
         {
             _id: "6",
@@ -52,7 +57,9 @@ const data = {
             price: 43,
             brand: "Gucci",
             rating: 4.7,
-            numReviews: 4
+            numReviews: 4,
+            countInStock: 7,
+            countInStock: 0
         }
         ]
 }

@@ -191,15 +191,15 @@ li {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .details-image {
-  flex: 2 1 30rem;
+  flex: 2 1 36rem;
 }
 
 .details-image img {
-  max-width: 30rem;
+  max-width: 36rem;
   width: 100%;
 }
 
