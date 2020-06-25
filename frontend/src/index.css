@@ -254,3 +254,7 @@ details-info li, .details-action li {
 .add-to-cart-button:hover {
   border: .1rem #404040 solid;
 }
+
+.button.primary {
+  background-color: #f0c040;
+}
