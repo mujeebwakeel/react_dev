@@ -19,7 +19,11 @@ useEffect(() => {
     if (productId) {
         dispatch(addToCart(productId, qty));
     }
-}, [] )
+}, [] );
+
+const checkoutHandler = () => {
+    props.history.push("/signin?redirect=shipping");
+}
 
     return (
         <div className="cart">
@@ -66,8 +70,8 @@ useEffect(() => {
                     :
                     $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
                 </h3>
-                <li className="button">
-                    <button className="button primary" disabled={cartItems.length === 0}>
+                <li className="proceed-to-checkout">
+                    <button  onClick={checkoutHandler}  className="proceed-to-checkout-button" disabled={cartItems.length === 0}>
                         Proceed to Checkout
                     </button>
                 </li>
