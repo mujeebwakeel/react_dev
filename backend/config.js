@@ -1,4 +1,5 @@
 
 export default {
-    MONGODB_URL: process.env.MONGODB_URL || "mongodb://localhost/whykay"   
+    MONGODB_URL: process.env.MONGODB_URL || "mongodb://localhost/whykay",
+    JWT_SECRET: process.env.JWT_SECRET || "somethingsecret"   
 }

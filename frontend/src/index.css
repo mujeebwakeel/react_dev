@@ -220,7 +220,7 @@ li {
   padding: 0;
 }
 
-details-info li, .details-action li {
+.details-info li, .details-action li {
   margin-bottom: 1rem;
 }
 
@@ -349,6 +349,60 @@ details-info li, .details-action li {
 .cart-name a {
 	text-decoration: none;
 }
+
+.form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	width: 25rem;
+	border: .2rem #f56464 solid;
+	padding: 2rem;
+	background-color: beige;
+	border-radius: .5rem;
+	max-width: 60rem;
+}
+
+.form-container li {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.5rem;
+}
+
+.form-container li h2 {
+	text-align: center;
+}
+
+.form-container li input {
+	border-radius: .5rem;
+	outline: none;
+	background-color: cadetblue;
+	padding: .5rem;
+}
+
+.button.primary {
+	background-color: #f0c040;
+	padding: 1rem;
+	border: .1rem #808080 solid;
+	border-radius: .5rem;
+	cursor: pointer;
+	outline: none;
+}
+
+.button {
+	border:.1rem #f0c040 solid;
+	border-radius: .5rem;
+	text-decoration: none;
+	text-align: center;
+	padding: .5rem;
+	background-color: #f8ae3f;
+}
+
 
 
 
