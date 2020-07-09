@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react"
 import {Link} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import signin from "../actions/userActions";
+import { register } from "../actions/userActions";
 
 function RegisterScreen(props) {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const userSignin = useSelector(state => state.userSignin);
-    const {loading, error, userInfo} = userSignin;
+    const [rePassword, setRePassword] = useState("");
+    const userRegister = useSelector(state => state.userRegister);
+    const {loading, error, userInfo} = userRegister;
 
     const dispatch = useDispatch();
 
     useEffect  (() => {
-        
+        if(userInfo) {
+            props.history.push("/");
+        }
         return() => {
             //
         };
-    }, []);
+    }, [userInfo]);
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(signin(email,password));
+        dispatch(register(name,email,password));
     }
     
     return ( 
@@ -28,11 +32,15 @@ function RegisterScreen(props) {
         <form onSubmit={submitHandler}>
             <ul className="form-container">
                 <li>
-                    <h2>Sign-In</h2>
+                    <h2>Register</h2>
                 </li>
                 <li>
                     {loading && <div>Loading...</div>}
                     {error && <div>{error}</div>}
+                </li>
+                <li>
+                    <label htmlFor="name">Name</label>
+                    <input type="name" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)}></input>
                 </li>
                 <li>
                     <label htmlFor="email">Email</label>
@@ -43,14 +51,16 @@ function RegisterScreen(props) {
                     <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 </li>
                 <li>
-                    <button type="submit" className="button primary">Signin</button>
+                    <label htmlFor="rePassword">re-Enter Password</label>
+                    <input type="password" name="rePassword" id="rePassword" value={rePassword} onChange={(e) => setRePassword(e.target.value)}></input>
                 </li>
                 <li>
-                    New to Whykay Enterprise?
+                    <button type="submit" className="button primary">Register</button>
                 </li>
                 <li>
-                    <Link to="/register" className="button">Create your Whykay Account</Link>
+                    <div>Already Have an Account? <Link to="/signin">Sign-in</Link></div>
                 </li>
+                
             </ul>
         </form>
         
