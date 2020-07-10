@@ -33,6 +33,7 @@ const {userInfo} = userSignin;
         			</div>
         			<div className="header-links">
 						<Link to='/cart'>Cart</Link>
+						{userInfo && userInfo.isAdmin && <Link to="/products">Create-Product</Link>}
 						{userInfo? <Link to="/profile">{userInfo.name}</Link>:
 						<Link to='/signin'>Sign In</Link> 
   						}

@@ -42,20 +42,28 @@ router.post("/signin", async (req,res) =>{
 });
 
 router.get("/createadmin", async (req, res) => {
-    try {
-        const user = new User({
-            name: "Mujeeb",
-            email: "wakeelmujeeb@yahoo.com",
-            password: "123",
-            isAdmin: true
-        });
+    User.find({}, (err, foundUsers) => {
+        if(err){
+            console.log(error);
+        }else{
+            res.send(foundUsers);
+        }
+    })
+        
+    });
+    // try {
+    //     const user = new User({
+    //         name: "Mujeeb",
+    //         email: "wakeelmujeeb@yahoo.com",
+    //         password: "123",
+    //         isAdmin: true
+    //     });
     
-        const newUser = await user.save();
-        res.send(newUser);
-    } catch (error) {
-        res.send({msg:error.message});
-    }
+    //     const newUser = await user.save();
+    //     res.send(newUser);
+    // } catch (error) {
+    //     res.send({msg:error.message});
+    // }
     
-});
 
 export default router;
