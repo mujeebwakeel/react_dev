@@ -360,7 +360,7 @@ li {
 .form-container {
 	display: flex;
 	flex-direction: column;
-	width: 25rem;
+	width: 35rem;
 	border: .2rem #f56464 solid;
 	padding: 2rem;
 	background-color: beige;
