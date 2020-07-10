@@ -8,8 +8,6 @@ function ProductsScreen(props) {
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
     const [category, setCategory] = useState("");
-    const [numReviews, setNumReviews] = useState("");
-    const [rating, setRating] = useState("");
     const [brand, setBrand] = useState("");
     const [description, setDescription] = useState("");
     const [countInStock, setCountInStock] = useState("");
@@ -28,7 +26,7 @@ function ProductsScreen(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(saveProduct({name,price,brand,description,category,numReviews,rating,image,countInStock}));
+        dispatch(saveProduct({name,price,brand,description,category,image,countInStock}));
     }
     
     return ( 
@@ -61,14 +59,6 @@ function ProductsScreen(props) {
                 <li>
                     <label htmlFor="category">Category</label>
                     <input type="text" name="category" id="category" onChange={(e) => setCategory(e.target.value)}></input>
-                </li>
-                <li>
-                    <label htmlFor="rating">Rating</label>
-                    <input type="Number" name="rating" id="rating" onChange={(e) => setRating(e.target.value)}></input>
-                </li>
-                <li>
-                    <label htmlFor="numReviews">NumReviews</label>
-                    <input type="Number" name="numReviews" id="numReviews" onChange={(e) => setNumReviews(e.target.value)}></input>
                 </li>
                 <li>
                     <label htmlFor="countInStock">countInStock</label>

@@ -15,8 +15,8 @@ const listProducts = () =>  async (dispatch) => {
 const saveProduct = (product) =>  async (dispatch, getState) => {
     try {
         dispatch ({type: PRODUCT_SAVE_REQUEST, payload: product});
-        const {usersignin: {userInfo} } = getState();
-        const {data} = await axios.post("/api/product", product, {
+        const {userSignin: {userInfo} } = getState();
+        const {data} = await axios.post("/api/products", product, {
             headers: {
                 "Authorization": "Bearer " + userInfo.token
             }
