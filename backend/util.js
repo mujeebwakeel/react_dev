@@ -19,11 +19,15 @@ const isAuth = (req, res, next) => {
     if(token) {
         const onlyToken = token.slice(7, token.length);
         jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
-            req.user = token;
+            if(err){
+                return res.status(401).send({msg: "invalid token"});
+            }
+            req.user = decode;
             return next();
         });
+    } else{
+        return res.status(401).send({msg: "Token is not supplied"});
     }
-    return res.status(401).send({msg: "Token is not supplied"});
 }
 
 const isAdmin = (req, res, next) => {

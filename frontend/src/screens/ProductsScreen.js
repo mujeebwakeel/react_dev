@@ -110,7 +110,7 @@ function ProductsScreen(props) {
                 </div>
                 }
                 <div className="product-list">
-                    <table>
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th>Id</th>                                

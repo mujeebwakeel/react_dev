@@ -406,11 +406,38 @@ li {
 .button {
 	border:.1rem #f0c040 solid;
 	border-radius: .5rem;
-	text-decoration: none;
 	text-align: center;
+	text-decoration: none;
 	padding: .5rem;
 	background-color: #f8ae3f;
 }
 
+.product-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
 
+.content-margined {
+	margin: 1rem;
+}
 
+.table {
+	width: 100%;
+}
+
+thead>tr {
+	background-color: beige;
+}
+
+tr {
+	text-align: center;
+}
+
+tbody>tr:nth-child(odd) {
+	background-color: aquamarine;
+}
+
+tbody>tr:nth-child(even) {
+	background-color: rgb(241, 211, 76);
+}

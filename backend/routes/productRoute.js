@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 import Product from "../models/productModel"
-import { getToken } from "../util";
+import { isAuth, isAdmin } from "../util";
 
 const router = express.Router();
 
@@ -14,10 +14,10 @@ router.get("/:id", async (req, res) => {
     if(product) {
         return res.send(product);
     }
-    return res.status(500).send({message: "Product Not Found"});
+    return res.status(400).send({message: "Product Not Found"});
 })
 
-router.post("/", async (req, res) => {
+router.post("/", isAuth, isAdmin, async (req, res) => {
     const product = new Product ({
         name: req.body.name,
         price: req.body.price,
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
     return res.status(500).send({message: "Error while creating Product"});
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAuth, isAdmin, async (req, res) => {
     const product = await Product.findById(req.params.id);
         product.name = req.body.name;
         product.price = req.body.price;
@@ -53,7 +53,7 @@ router.put("/:id", async (req, res) => {
     return res.status(500).send({message: "Error while updating Product"});
     });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAuth, isAdmin, async (req, res) => {
     const deletedProduct = await Product.findById(req.params.id);
     if(deletedProduct) {
         await deletedProduct.remove();

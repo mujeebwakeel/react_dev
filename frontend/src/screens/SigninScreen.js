@@ -10,10 +10,11 @@ function SigninScreen(props) {
     const {loading, error, userInfo} = userSignin;
 
     const dispatch = useDispatch();
+    const redirect = props.location.search? props.location.search.split("=")[1] : "/";
 
     useEffect  (() => {
         if(userInfo) {
-            props.history.push("/");
+            props.history.push(redirect);
         }
         return() => {
             //
@@ -51,7 +52,7 @@ function SigninScreen(props) {
                     New to Whykay Enterprise?
                 </li>
                 <li>
-                    <Link to="/register" className="button">Create your Whykay Account</Link>
+                    <Link to={redirect === '/'? "/register" : "register?register=" + redirect} className="button">Create your Whykay Account</Link>
                 </li>
             </ul>
         </form>
