@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import {Link} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { saveProduct, listProducts, deleteProduct } from "../actions/productActions";
 
@@ -14,19 +13,20 @@ function ProductsScreen(props) {
     const [description, setDescription] = useState("");
     const [countInStock, setCountInStock] = useState("");
     const productList = useSelector(state => state.productList);
-	const {products, loading, error} = productList;
+	const {products} = productList;
     const productSave = useSelector(state => state.productSave);
     const {loading: loadingSave, success: successSave, error: errorSave} = productSave;
     const productDelete = useSelector(state => state.productDelete);
-    const {loading: loadingDelete, success: successDelete, error: errorDelete} = productDelete;
+    const { success: successDelete,} = productDelete;
+    const allItems = "all"; 
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     useEffect  (() => {
         if(successSave) {
             setModalVisible(false);
         }
-        dispatch(listProducts());
+        dispatch(listProducts(allItems)); 
         return() => {
             //
         };

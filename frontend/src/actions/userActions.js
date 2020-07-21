@@ -13,12 +13,23 @@ const signin = (email,password) => async (dispatch) => {
     }
 }
 
-const register = (name,email,password) => async (dispatch) => {
-    dispatch({ type: USER_REGISTER_REQUEST, payload: {name, email, password}});
+const register = (user) => async (dispatch, getState) => {
+    dispatch({ type: USER_REGISTER_REQUEST, payload: user});
     try {
-        const {data} = await Axios.post("/api/users/register", {name,email,password});
-        dispatch({type: USER_REGISTER_SUCCESS, payload:data});
-        Cookie.set("userInfo", JSON.stringify(data));
+        if(user._id){
+            const {userSignin: {userInfo} } = getState();
+            const {data} = await Axios.put("/api/users/register/"+ user._id, user, {
+                headers: {
+                    "Authorization": "Bearer " + userInfo.token
+                }
+            });
+            dispatch({type: USER_REGISTER_SUCCESS, payload:data});
+            Cookie.set("userInfo", JSON.stringify(data));
+        } else {
+            const {data} = await Axios.post("/api/users/register", user);
+            dispatch({type: USER_REGISTER_SUCCESS, payload:data});
+            Cookie.set("userInfo", JSON.stringify(data));
+        }
     } catch (error) {
         dispatch({type: USER_REGISTER_FAIL, payload:error.message});
     }

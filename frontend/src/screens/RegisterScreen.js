@@ -8,6 +8,7 @@ function RegisterScreen(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
+    const [description, setDescription] = useState("");
     const userRegister = useSelector(state => state.userRegister);
     const {loading, error, userInfo} = userRegister;
 
@@ -24,7 +25,7 @@ function RegisterScreen(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(register(name,email,password));
+        dispatch(register({name,email,password,description,rePassword}));
     }
     
     return ( 
@@ -53,6 +54,10 @@ function RegisterScreen(props) {
                 <li>
                     <label htmlFor="rePassword">re-Enter Password</label>
                     <input type="password" name="rePassword" id="rePassword" onChange={(e) => setRePassword(e.target.value)}></input>
+                </li>
+                <li>
+                    <label htmlFor="description">Description of yourself</label>
+                    <input type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)}></input>
                 </li>
                 <li>
                     <button type="submit" className="button primary">Register</button>

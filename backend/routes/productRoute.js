@@ -1,12 +1,21 @@
 import express, { Router } from "express";
-import Product from "../models/productModel"
+import  { Product } from "../models/productModel"
 import { isAuth, isAdmin } from "../util";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    const products = await Product.find({});
-    res.send(products);
+router.get("/", async (req, res) => { 
+    if(req.query.search && req.query.search === "all") {
+        const products = await Product.find({});
+        res.send(products);
+    } else if(req.query.search && req.query.search !== "undefined") {
+        const item = req.query.search;
+        const products = await Product.find({category: item});
+        res.send(products);
+    } else {
+        const products = await Product.find({category: "Shirt"});
+        res.send(products);
+    }
 });
 
 router.get("/:id", async (req, res) => {

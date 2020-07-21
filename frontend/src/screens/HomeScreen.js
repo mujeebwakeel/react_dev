@@ -7,19 +7,23 @@ function HomeScreen (props) {
 	const productList = useSelector(state => state.productList);
 	const {products, loading, error} = productList;
 	const dispatch = useDispatch();
+	const searchItem = props.location.search? props.location.search.split("=")[1] : " ";
+
 	useEffect(() =>{
+		searchItem?
+		dispatch(listProducts(searchItem)):
 		dispatch(listProducts());
 
 		return () => { 
 			//
 		};  
-	}, []);
+	}, [searchItem]);
 
     return (
 		loading? <div>Loading...</div> :
 		error? <div>{error}</div> :
         <ul className="products">
-    		{
+    		{ products.length === 0? <div>Product is out of stock</div>:
     		  products.map(product => 
     		    <li key={product._id}>
       				<div className="product">

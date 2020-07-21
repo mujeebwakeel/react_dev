@@ -11,19 +11,21 @@ import ProductsScreen from './screens/ProductsScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
 const userSignin = useSelector(state => state.userSignin);
 const {userInfo} = userSignin;
   
-  const openMenu = () => {
-    	document.querySelector(".sidebar").classList.add("open");
-  }
+	const openMenu = () => {
+		document.querySelector(".sidebar").classList.add("open");
+	}
   
-  const closeMenu = () => {
-    	document.querySelector(".sidebar").classList.remove("open");
-  }
+	const closeMenu = () => {
+		document.querySelector(".sidebar").classList.remove("open");
+	}
   
+   	
   return (
     <BrowserRouter>
         <div className="grid-container">
@@ -48,6 +50,7 @@ const {userInfo} = userSignin;
 					<Route path="/products" component= {ProductsScreen} />
 					<Route path="/shipping" component= {ShippingScreen} />
 					<Route path="/payment" component= {PaymentScreen} />
+					<Route path="/profile" component= {ProfileScreen} />
 					<Route path="/placeorder" component= {PlaceOrderScreen} />
 					<Route path="/register" component = {RegisterScreen}/>
 					<Route path="/signin" component = {SigninScreen}/>
@@ -65,10 +68,34 @@ const {userInfo} = userSignin;
         			</button>
         				<ul>
         					<li>
-        						<a href="imdex.html">Trousers</a>
+        						<Link to="/" onClick={closeMenu}>Shirts</Link>
         					</li>
         					<li>
-        						<a href="index.html">Shirts</a>
+								<Link to="/?search=Trouser" onClick={closeMenu}>Trousers</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Shoe" onClick={closeMenu}>Shoes</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Watch" onClick={closeMenu}>Wrist-watches</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Sander" onClick={closeMenu}>Sanders</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Belt" onClick={closeMenu}>Belts</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Bracelet" onClick={closeMenu}>Bracelets</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Tie" onClick={closeMenu}>Ties</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Undie" onClick={closeMenu}>Undies</Link>
+        					</li>
+							<li>
+								<Link to="/?search=Slipper" onClick={closeMenu}>Slippers</Link>
         					</li>
         				</ul>
         		</aside>
