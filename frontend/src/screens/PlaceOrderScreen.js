@@ -12,10 +12,20 @@ function PlaceOrderScreen(props) {
     } else if(!payment.paymentMethod) {
         props.history.push("/payment"); 
     }
+ 
+    const itemsPrice = cartItems.reduce((a, c) => a + c.price*c.qty, 0);
+    const ShippingPrice = itemsPrice > 100? 70 : 10;
+    const taxPrice = 0.15 * itemsPrice;
+    const totalPrice = itemsPrice + ShippingPrice + taxPrice;
+
+    const placeOrderHandler = () => {
+        // create order
+    }
 
 useEffect(() => { 
     
 }, [] );
+
     return (
         <div>
             <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -24,8 +34,7 @@ useEffect(() => {
                     <div>
                         <h3>Shipping Address</h3>
                         <div>
-                            {cart.shipping.address}, {cart.shipping.city}, 
-                            {cart.shipping.postalCode}, {cart.shipping.country},
+                            {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
                         </div>
                     </div>
                     <div>
@@ -67,11 +76,30 @@ useEffect(() => {
                     </div>
                 </div>
                 <div className="placeorder-action">
-                    <h3>
-                        Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
-                        :
-                        $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
-                    </h3>
+                    <ul>
+                        <li className="proceed-to-placeorder">
+                            <button className="proceed-to-checkout-button" onClick={placeOrderHandler}>Place Order</button>
+                        </li>
+                        <li>
+                            <h3>Order Summary</h3>
+                        </li>
+                        <li>
+                            <div>Items Total Price</div>
+                            <div>${itemsPrice}</div>
+                        </li>
+                        <li>
+                            <div>Shipping</div>
+                            <div>${ShippingPrice}</div>
+                        </li>
+                        <li>
+                            <div>tax</div>
+                            <div>${taxPrice}</div>
+                        </li>
+                        <li>
+                            <div>Order Total</div>
+                            <div>${totalPrice}</div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

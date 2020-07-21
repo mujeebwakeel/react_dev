@@ -75,7 +75,7 @@ const checkoutHandler = () => {
                         Proceed to Checkout
                     </button>
                 </li>
-            </div>
+            </div> 
 
         </div>
     )
