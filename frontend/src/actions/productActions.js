@@ -33,7 +33,7 @@ const saveProduct = (product) =>  async (dispatch, getState) => {
         }
         
     } catch (error) {
-        dispatch({type: PRODUCT_SAVE_FAIL, payload:error.message});
+        dispatch({type: PRODUCT_SAVE_FAIL, payload:"All fields are required"});
 
     }
 }
@@ -46,7 +46,7 @@ const detailsProduct = (productId) =>   async (dispatch) => {
             dispatch({type: PRODUCT_DETAILS_SUCCESS, payload:data});
     }
     catch (error) {
-        dispatch({type: PRODUCT_DETAILS_FAIL, payload:error.message});
+        dispatch({type: PRODUCT_DETAILS_FAIL, payload:"Product Not Found"});
     }
 }
 

@@ -199,12 +199,12 @@ li {
 }
 
 .details-image {
-  flex: 2 1 33rem;
+  flex: 2 1 35rem;
 }
 
 .details-image img {
-  max-width: 33rem;
-  width: 100%;
+  max-width: 35rem;
+  height: 45rem;
 }
 
 .details-info {

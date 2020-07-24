@@ -42,11 +42,12 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
         rating: req.body.rating,
         numReviews: req.body.numReviews
     });
-    const newProduct = await product.save();
-    if(newProduct) {
+    product.save((err, newProduct) => {
+        if(err){
+            return res.status(500).send({message: "Error while creating Product"});
+        }
         return res.status(201).send({message: "New Product Created", data: newProduct});
-    }
-    return res.status(500).send({message: "Error while creating Product"});
+    });
 });
 
 router.put("/:id", isAuth, isAdmin, async (req, res) => {
@@ -59,11 +60,12 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
         product.countInStock = req.body.countInStock;
         product.description = req.body.description;
         
-        const foundProduct = await product.save();
-    if(foundProduct) {
-        return res.status(200).send({message: "Product Updated", data: foundProduct});
-    }
-    return res.status(500).send({message: "Error while updating Product"});
+        product.save((err,foundProduct) => {
+            if(err) {
+                return res.status(500).send({message: "Error while updating Product"});
+            }
+            return res.status(200).send({message: "Product Updated", data: foundProduct});
+        });
     });
 
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {

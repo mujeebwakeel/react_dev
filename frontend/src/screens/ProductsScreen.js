@@ -71,33 +71,34 @@ function ProductsScreen(props) {
                                 {errorSave && <div>{errorSave}</div>}
                             </li>
                             <li>
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name">Name*</label>
                                 <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)}></input>
                             </li>
                             <li>
-                                <label htmlFor="image">Image URL</label>
+                                <label htmlFor="image">Image URL*</label>
                                 <input type="text" name="image" id="image" value={image} onChange={(e) => setImage(e.target.value)}></input>
                             </li>
                             <li>
-                                <label htmlFor="price">Price($)</label>
+                                <label htmlFor="price">Price($)*</label>
                                 <input type="Number" name="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)}></input>
                             </li>
                             <li>
-                                <label htmlFor="brand">Brand</label>
+                                <label htmlFor="brand">Brand*</label>
                                 <input type="text" name="brand" id="brand" value={brand} onChange={(e) => setBrand(e.target.value)}></input>
                             </li>
                             <li>
-                                <label htmlFor="category">Category</label>
+                                <label htmlFor="category">Category*</label>
                                 <input type="text" name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)}></input>
                             </li>
                             <li>
-                                <label htmlFor="countInStock">countInStock</label>
+                                <label htmlFor="countInStock">countInStock*</label>
                                 <input type="Number" name="countInStock" id="countInStock" value={countInStock} onChange={(e) => setCountInStock(e.target.value)}></input>
                             </li>
                             <li>
-                                <label htmlFor="description">Description</label>
+                                <label htmlFor="description">Description*</label>
                                 <textarea name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea> 
                             </li>
+                            <li>*required fields</li>
                             <li>
                                 <button type="submit" className="button primary">{ id ? "Update" : "Create" }</button>
                             </li>

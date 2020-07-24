@@ -40,28 +40,29 @@ function RegisterScreen(props) {
                     {error && <div>{error}</div>}
                 </li>
                 <li>
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">Name*</label>
                     <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}></input>
                 </li>
                 <li>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email*</label>
                     <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}></input>
                 </li>
                 <li>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password*</label>
                     <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)}></input>
                 </li>
                 <li>
-                    <label htmlFor="rePassword">re-Enter Password</label>
+                    <label htmlFor="rePassword">re-Enter Password*</label>
                     <input type="password" name="rePassword" id="rePassword" onChange={(e) => setRePassword(e.target.value)}></input>
                 </li>
                 <li>
-                    <label htmlFor="description">Description of yourself</label>
+                    <label htmlFor="description">Description of yourself*</label>
                     <textarea type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)}></textarea> 
                 </li>
                 <li>
                     <button type="submit" className="button primary">Register</button>
                 </li>
+                <li>*required field</li>
                 <li>
                     <div>Already Have an Account? <Link to={redirect === "/" ? "/signin" : "/signin?redirect="+redirect}>Sign-in</Link></div>
                 </li>
