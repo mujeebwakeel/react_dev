@@ -13,7 +13,7 @@ function SigninScreen(props) {
     const redirect = props.location.search? props.location.search.split("=")[1] : "/";
 
     useEffect  (() => {
-        if(userInfo) {
+        if(userInfo) { 
             props.history.push(redirect);
         }
         return() => {

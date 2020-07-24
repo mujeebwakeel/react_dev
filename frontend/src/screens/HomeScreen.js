@@ -10,9 +10,7 @@ function HomeScreen (props) {
 	const searchItem = props.location.search? props.location.search.split("=")[1] : " ";
 
 	useEffect(() =>{
-		searchItem?
-		dispatch(listProducts(searchItem)):
-		dispatch(listProducts());
+		dispatch(listProducts(searchItem))
 
 		return () => { 
 			//
@@ -37,8 +35,8 @@ function HomeScreen (props) {
     		  )
     		}
     
-    		</ul>
-        )
+    	</ul>
+    )
 }
 
 export default HomeScreen;

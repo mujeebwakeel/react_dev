@@ -4,25 +4,29 @@ import { getToken, isAuth } from "../util";
 const router = express.Router();
 
 router.post("/register", async (req,res) =>{
-    const user = new User({
-        name: req.body.name,
-        email:req.body.email,
-        password:req.body.password,
-        rePassword:req.body.rePassword,
-        description: req.body.description 
-    });
-    const newUser = await user.save();
-    if(newUser) {
-        res.send({
-            _id: newUser.id,
-            name: newUser.name,
-            email: newUser.email,
-            isAdmin: newUser.isAdmin,
-            description:newUser.description,
-            token: getToken(newUser)
-        })
-    } else {
-        res.status(401).send({msg: "Invalid User Data"});
+    if(req.body.password === req.body.rePassword) {
+        const user = new User({
+            name: req.body.name,
+            email:req.body.email,
+            password:req.body.password,
+            rePassword:req.body.rePassword,
+            description: req.body.description 
+        });
+        user.save((err, newUser) => {
+            if(err) {
+                return res.status(401).send({msg: "Invalid User Data"});
+            }
+            res.send({
+                _id: newUser.id,
+                name: newUser.name,
+                email: newUser.email,
+                isAdmin: newUser.isAdmin,
+                description:newUser.description,
+                token: getToken(newUser)
+            })        
+        });
+    }else{
+        res.status(401).send({msg: "password confirmation failed"});    
     }
 });
 
@@ -32,18 +36,19 @@ router.put("/register/:id", isAuth, async (req, res) => {
         user.email = req.body.email;
         user.description = req.body.description;
         
-        const foundUser = await user.save();
-    if(foundUser) {
-        return res.send ({
-            _id: foundUser.id,
-            name: foundUser.name,
-            email: foundUser.email,
-            description: foundUser.description,
-            token: getToken(foundUser),
-            isAdmin: foundUser.isAdmin
-        })
-    }
-    return res.status(500).send({message: "Error while updating User Profile"});
+        user.save((err, foundUser) => {
+            if(err){
+                return res.status(500).send({message: "Error while updating User Profile"});
+            }
+            return res.send ({
+                _id: foundUser.id,
+                name: foundUser.name,
+                email: foundUser.email,
+                description: foundUser.description,
+                token: getToken(foundUser),
+                isAdmin: foundUser.isAdmin
+            })        
+        });
     });
 
 router.post("/signin", async (req,res) =>{
@@ -75,19 +80,7 @@ router.get("/createadmin", async (req, res) => {
     })
         
     });
-    // try {
-    //     const user = new User({
-    //         name: "Mujeeb",
-    //         email: "wakeelmujeeb@yahoo.com",
-    //         password: "123",
-    //         isAdmin: true
-    //     });
     
-    //     const newUser = await user.save();
-    //     res.send(newUser);
-    // } catch (error) {
-    //     res.send({msg:error.message});
-    // }
     
 
 export default router;

@@ -13,7 +13,7 @@ function userSigninReducer (state={}, action){
     }
 }
 
-function userRegisterReducer (state={ userInfo:{} }, action){
+function userRegisterReducer (state={}, action){
     switch(action.type) {
         case USER_REGISTER_REQUEST:
              return {loading: true};
@@ -22,7 +22,7 @@ function userRegisterReducer (state={ userInfo:{} }, action){
         case USER_REGISTER_FAIL:
             return {loading: false, error: action.payload};
         default:
-            return state;
+            return state; 
     }
 }
 

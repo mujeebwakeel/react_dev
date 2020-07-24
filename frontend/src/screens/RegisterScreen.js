@@ -57,7 +57,7 @@ function RegisterScreen(props) {
                 </li>
                 <li>
                     <label htmlFor="description">Description of yourself</label>
-                    <input type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)}></input>
+                    <textarea type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)}></textarea> 
                 </li>
                 <li>
                     <button type="submit" className="button primary">Register</button>

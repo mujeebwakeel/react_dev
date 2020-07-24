@@ -6,24 +6,28 @@ const router = express.Router();
 
 router.get("/", async (req, res) => { 
     if(req.query.search && req.query.search === "all") {
-        const products = await Product.find({});
-        res.send(products);
+        Product.find({}, (err, products) => {
+            res.send(products);
+        });
     } else if(req.query.search && req.query.search !== "undefined") {
         const item = req.query.search;
-        const products = await Product.find({category: item});
-        res.send(products);
+        Product.find({category: item}, (err, products) => {
+            res.send(products);
+        });
     } else {
-        const products = await Product.find({category: "Shirt"});
-        res.send(products);
+        Product.find({category: "Shirt"}, (err, products) => {
+            res.send(products);
+        }); 
     }
 });
 
-router.get("/:id", async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if(product) {
-        return res.send(product);
-    }
-    return res.status(400).send({message: "Product Not Found"});
+router.get("/:id", (req, res) => {
+    Product.findById(req.params.id, (err, product) => {
+        if(err){
+            return res.status(400).send({message: "Product Not Found"});
+        }
+            res.send(product);
+    });
 })
 
 router.post("/", isAuth, isAdmin, async (req, res) => {

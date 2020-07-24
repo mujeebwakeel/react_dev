@@ -20,11 +20,11 @@ const register = (user) => async (dispatch, getState) => {
             const {userSignin: {userInfo} } = getState();
             const {data} = await Axios.put("/api/users/register/"+ user._id, user, {
                 headers: {
-                    "Authorization": "Bearer " + userInfo.token
+                    "Authorization": "Bearer " + userInfo.token 
                 }
             });
             dispatch({type: USER_REGISTER_SUCCESS, payload:data});
-            Cookie.set("userInfo", JSON.stringify(data));
+            Cookie.set("userInfo", JSON.stringify(data)); 
         } else {
             const {data} = await Axios.post("/api/users/register", user);
             dispatch({type: USER_REGISTER_SUCCESS, payload:data});

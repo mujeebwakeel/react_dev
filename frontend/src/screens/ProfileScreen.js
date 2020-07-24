@@ -7,7 +7,7 @@ function ProfileScreen(props) {
     const {userInfo} = userSignin;
     const [name, setName] = useState('');
     const [email, setEmail] = useState("");
-    const [id, setId] = useState(userInfo._id);
+    const [id, setId] = useState("");
     const [description, setDescription] = useState("");
     const userRegister = useSelector(state => state.userRegister);
     const {loading: loadingSave, error:errorSave, success: successSave} = userRegister;

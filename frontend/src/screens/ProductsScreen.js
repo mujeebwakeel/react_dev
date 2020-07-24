@@ -17,7 +17,7 @@ function ProductsScreen(props) {
     const productSave = useSelector(state => state.productSave);
     const {loading: loadingSave, success: successSave, error: errorSave} = productSave;
     const productDelete = useSelector(state => state.productDelete);
-    const { success: successDelete,} = productDelete;
+    const { success: successDelete} = productDelete;
     const allItems = "all"; 
 
     const dispatch = useDispatch(); 
