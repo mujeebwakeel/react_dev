@@ -6,9 +6,11 @@ import { cartReducer } from "./reducers/cartReducers";
 import { userSigninReducer, userRegisterReducer } from "./reducers/userReducers";
 
 const cartItems = Cookie.getJSON("cartItems") || []; 
-const userInfo = Cookie.getJSON("userInfo") || null;;
+const userInfo = Cookie.getJSON("userInfo") || null;
+const shipping = Cookie.getJSON("shipping") || {};
+const payment = Cookie.getJSON("payment") || {};
 
-const initialState ={cart: {cartItems, shipping:{}, payment:{} }, userSignin: {userInfo}, userRegister: {userInfo} };
+const initialState ={cart: {cartItems, shipping, payment }, userSignin: {userInfo}, userRegister: {userInfo} };
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,

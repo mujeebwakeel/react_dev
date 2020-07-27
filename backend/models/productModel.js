@@ -10,9 +10,28 @@ const productSchema = new mongoose.Schema({
     description: {type: String, required: true},
     rating: {type: Number, default: 0, required: true},
     numReviews: {type: Number, default: 0, required: true}
-    
+     
     });
 
-const Product = mongoose.model("Product", productSchema);
+const purchaseSchema = new mongoose.Schema({
+    order_time: {type: String, required: true}, 
+    order_id: {type: String, required: true}, 
+    customer_name: {type: String, required: true}, 
+    customer_email: {type: String, required: true},
+    order_amount: {type: Number, required: true},
+    item_number: {type: Number, required: true},
+    items: [
+        {
+            product: {type: String, required: true},
+            name: {type: String, required: true},
+            image: {type: String, required: true},
+            price: {type: Number, required: true},
+            qty: {type: Number, required: true},
+       }
+    ]
+})
 
-export { Product };
+const Product = mongoose.model("Product", productSchema);
+const Purchase = mongoose.model("Purchase", purchaseSchema)
+
+export { Product, Purchase };

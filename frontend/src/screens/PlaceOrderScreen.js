@@ -1,10 +1,18 @@
-import React, { useEffect } from "react"
-import { useSelector } from "react-redux";
+import React, { useEffect, useState, useRef } from "react"
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { purchasedItem } from "../actions/cartActions";
 
 function PlaceOrderScreen(props) {
     
+    const [paidFor, setPaidFor] = useState(false);
+    const [error, setError] = useState(null);
+    const [orderDetails, setOrderDetails] = useState({});
+    const dispatch = useDispatch();
+    const paypalRef = useRef();
+    const userSignin = useSelector(state => state.userSignin);
+    const {userInfo} = userSignin;
     const cart = useSelector(state => state.cart);
     const {cartItems, shipping, payment} = cart;
     if(!shipping.address){
@@ -12,20 +20,117 @@ function PlaceOrderScreen(props) {
     } else if(!payment.paymentMethod) {
         props.history.push("/payment"); 
     }
+
+    const handleReturn = (order) => {
+        const details = {
+            order_time: order.create_time, 
+            order_id: order.id, 
+            customer_name: userInfo.name, 
+            customer_email: userInfo.email,
+            order_amount: totalPrice,
+            item_number: itemNumber,
+            items: cartItems
+           }
+        dispatch(purchasedItem(details));
+        props.history.push("/");
+    }
  
+
     const itemsPrice = cartItems.reduce((a, c) => a + c.price*c.qty, 0);
+    const itemNumber = cartItems.reduce((a, c) => a + c.qty, 0);
     const ShippingPrice = itemsPrice > 100? 70 : 10;
     const taxPrice = 0.15 * itemsPrice;
     const totalPrice = itemsPrice + ShippingPrice + taxPrice;
 
-    const placeOrderHandler = () => {
-        // create order
-    }
-
-useEffect(() => { 
     
-}, [] );
+useEffect(() => {
+    window.paypal
+         .Buttons({
+             createOrder: (data, actions) => {
+                 return actions.order.create({
+                     intent: 'CAPTURE',
+                     purchase_units: [{
+                         description: "Whykay Enterprise Checkout",
+                         amount: {
+                             currency_code: "USD",
+                             value: totalPrice
+                         }
+                     }]
+                 })
+             },
+             onApprove: async (data, actions) => {
+                 const order = await actions.order.capture()
+                 setPaidFor(true);
+                 setOrderDetails(order);
+             },
+             onError: err => {
+                 setError(true);
+                 console.error(err); 
+             }
+         }).render(paypalRef.current)
+    
+}, [totalPrice] );
 
+    if(paidFor) {
+        return (
+            <div className="order-details">
+                <ul>
+                    <li>
+                        Thanks for making the purchase with whykay Enterprise
+                    </li>
+                    <li>
+                        <div>Time of Purchase:</div>
+                        <div>{orderDetails.create_time}</div>
+                    </li>
+                    <li>
+                        <div>Order_id:</div>
+                        <div>{orderDetails.id}</div>
+                    </li>
+                    <li>
+                        <div>Name of Buyer:</div>
+                        <div>{userInfo.name}</div>
+                    </li>
+                    <li>
+                        <div>Buyer's email:</div>
+                        <div>{userInfo.email}</div>
+                    </li>
+                    <li>
+                        <div>Shipping address:</div>
+                        <div className="shipping-address">
+                            {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
+                        </div>
+                    </li> 
+                    <li>
+                        <div>Number of items:</div>
+                        <div>{itemNumber}</div>
+                    </li>
+                    <li>
+                        <div>Transaction Amount:</div>
+                        <div>$ {totalPrice}</div>
+                    </li>
+                    <li>
+                        <div>Transaction Status:</div>
+                        <div>Successful</div>
+                    </li>
+                    <li className="proceed-to-checkout">
+                        <button className="button" type="button" onClick={() => handleReturn(orderDetails)}>Click to return</button>
+                    </li>
+                </ul>  
+            </div>
+                   
+                )
+            }
+
+    if(error) {
+        return (
+                    <div>
+                        Error in processing payment. Please try again
+                    </div>        
+                    
+                )
+            }
+        
+        
     return (
         <div>
             <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -78,7 +183,7 @@ useEffect(() => {
                 <div className="placeorder-action">
                     <ul>
                         <li className="proceed-to-placeorder">
-                            <button className="proceed-to-checkout-button" onClick={placeOrderHandler}>Place Order</button>
+                            <div ref={paypalRef}></div>
                         </li>
                         <li>
                             <h3>Order Summary</h3>
@@ -93,7 +198,7 @@ useEffect(() => {
                         </li>
                         <li>
                             <div>tax</div>
-                            <div>${taxPrice}</div>
+                            <div>${+taxPrice.toFixed(2)}</div>
                         </li>
                         <li>
                             <div>Order Total</div>

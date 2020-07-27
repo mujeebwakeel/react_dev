@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import  { Product } from "../models/productModel"
+import  { Product, Purchase } from "../models/productModel"
 import { isAuth, isAdmin } from "../util";
 
 const router = express.Router();
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
         }); 
     }
 });
-
+ 
 router.get("/:id", (req, res) => {
     Product.findById(req.params.id, (err, product) => {
         if(err){
@@ -77,5 +77,27 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
     return res.status(500).send({message: "Error while deleteting Product"});
 })
 
+router.post("/purchase", isAuth, async (req, res) => {
+    const product = new Purchase ({
+        order_time: req.body.order_time, 
+        order_id: req.body.order_id, 
+        customer_name: req.body.customer_name, 
+        customer_email: req.body.customer_email,
+        order_amount: req.body.order_amount,
+        item_number: req.body.item_number,
+    });
+
+    const items = req.body.items;
+    items.forEach(function(item) {
+        product.items.push(item);
+    })
+
+    product.save((err, purchasedProduct) => {
+        if(err){
+            return res.status(500).send({message: "Error while saving purchased product"});
+        }
+        return res.status(201).send({message: "New Product Created", data: purchasedProduct});
+    });
+})
 
 export default router;
