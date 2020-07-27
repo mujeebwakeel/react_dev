@@ -1,6 +1,6 @@
 import axios from "axios"
 import Cookie from "js-cookie"
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_SHIPPING, CART_SAVE_PAYMENT, CART_SAVE_PURCHASE, CART_SAVE_REQUEST } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_SHIPPING, CART_SAVE_PAYMENT, CART_SAVE_SUCCESS, CART_SAVE_REQUEST, PURCHASE_SAVE_REQUEST, PURCHASE_SAVE_SUCCESS } from "../constants/cartConstants";
 
 const addToCart = (productId, qty) => async (dispatch, getState) => {
 
@@ -49,10 +49,28 @@ const purchasedItem = (item) => async (dispatch, getState) => {
             }
         });
         dispatch({
-            type: CART_SAVE_PURCHASE, payload: data
+            type: CART_SAVE_SUCCESS, payload: data
         })  
      } catch (error) {  
          
-     }}
+     }
+}
 
-export {addToCart, removeFromCart, saveShipping, savePayment, purchasedItem};
+const listPurchase = () => async (dispatch, getState) => {
+    try {
+        dispatch ({type: PURCHASE_SAVE_REQUEST});
+        const {userSignin: {userInfo} } = getState();
+        const {data} = await axios.get("/api/products/soldout", {
+            headers: {
+                "Authorization": "Bearer " + userInfo.token
+            }
+        });
+        dispatch({
+            type: PURCHASE_SAVE_SUCCESS, payload: data
+        })  
+     } catch (error) { 
+         
+     }
+}
+
+export {addToCart, removeFromCart, saveShipping, savePayment, purchasedItem, listPurchase};

@@ -20,6 +20,24 @@ router.get("/", async (req, res) => {
         }); 
     }
 });
+
+router.get("/soldout", isAuth, isAdmin, (req, res) => {
+    Purchase.find({}, (err, foundGoods) => {
+        if(err) {
+            return res.send("Error while searching sold goods")
+        }
+            res.send(foundGoods);
+    })
+})
+
+router.get("/buy", (req, res) => {
+    Purchase.findByIdAndUpdate("5f1e32a20c02101a181ed527", {cleared: true}, (err, updatedProduct) => {
+        if(err) {
+            return res.send("cool")
+        }
+        res.send(updatedProduct);
+    })
+})
  
 router.get("/:id", (req, res) => {
     Product.findById(req.params.id, (err, product) => {
@@ -99,5 +117,18 @@ router.post("/purchase", isAuth, async (req, res) => {
         return res.status(201).send({message: "New Product Created", data: purchasedProduct});
     });
 })
+
+router.get("/soldout/:id", async (req, res) => {
+    const product = await Purchase.findById(req.params.id)
+    product.cleared = true;
+    product.save((err, clearedProduct) => {
+        if(err) {
+            return res.status(500).send({message: "Error while saving purchased product"});
+        }
+        return res.status(201).send({message: "New Product Created", data: clearedProduct});
+    })
+})
+
+
 
 export default router;

@@ -13,7 +13,9 @@ function ProductsScreen(props) {
     const [description, setDescription] = useState("");
     const [countInStock, setCountInStock] = useState("");
     const productList = useSelector(state => state.productList);
-	const {products} = productList;
+    const {products} = productList;
+    const userSignin = useSelector(state => state.userSignin);
+    const {userInfo} = userSignin;
     const productSave = useSelector(state => state.productSave);
     const {loading: loadingSave, success: successSave, error: errorSave} = productSave;
     const productDelete = useSelector(state => state.productDelete);
@@ -53,6 +55,8 @@ function ProductsScreen(props) {
     const deleteHandler = (product) => {
         dispatch(deleteProduct(product));
     }
+
+    if(userInfo && userInfo.isAdmin) {
     
     return ( <div className="content content-margined">
                 <div className="product-header">
@@ -143,8 +147,11 @@ function ProductsScreen(props) {
                 </div>
         
         </div>
-
    )
+}
+return (
+    <div>You are not authorised to use this page. Kindly go back</div>
+    )
 } 
 
 export default ProductsScreen;
