@@ -30,14 +30,6 @@ router.get("/soldout", isAuth, isAdmin, (req, res) => {
     })
 })
 
-router.get("/buy", (req, res) => {
-    Purchase.findByIdAndUpdate("5f1e32a20c02101a181ed527", {cleared: true}, (err, updatedProduct) => {
-        if(err) {
-            return res.send("cool")
-        }
-        res.send(updatedProduct);
-    })
-})
  
 router.get("/:id", (req, res) => {
     Product.findById(req.params.id, (err, product) => {
@@ -103,6 +95,7 @@ router.post("/purchase", isAuth, async (req, res) => {
         customer_email: req.body.customer_email,
         order_amount: req.body.order_amount,
         item_number: req.body.item_number,
+        shipping: req.body.shipping
     });
 
     const items = req.body.items;

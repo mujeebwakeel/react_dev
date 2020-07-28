@@ -32,7 +32,7 @@ function ProductsScreen(props) {
         return() => {
             //
         };
-    }, [successSave, successDelete]);
+    }, [successSave, successDelete, dispatch]);
 
     const openModal = (product) => {
         setModalVisible(true);

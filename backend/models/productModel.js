@@ -29,7 +29,13 @@ const purchaseSchema = new mongoose.Schema({
             qty: {type: Number, required: true},
        }
     ],
-    cleared: {type: Boolean, default:false, required: true}
+    cleared: {type: Boolean, default:false, required: true},
+    shipping: {
+                address: {type: String},
+                country: {type: String},
+                city: {type: String},
+                postalCode: {type: String}
+            }
 })
 
 const Product = mongoose.model("Product", productSchema);

@@ -7,7 +7,6 @@ function CartScreen(props) {
     
     const cart = useSelector(state => state.cart);
     const {cartItems} = cart;
-
     const productId = props.match.params.id;
     const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
     const dispatch = useDispatch();
@@ -19,11 +18,17 @@ useEffect(() => {
     if (productId) {
         dispatch(addToCart(productId, qty));
     }
-}, [] );
+}, [dispatch,productId,qty] );
 
 const checkoutHandler = () => {
     props.history.push("/signin?redirect=shipping");
 }
+
+    if(!cartItems) {
+        return (
+            <div>Kindly reload the browser to see the just checkedout items </div>
+        )
+    }
 
     return (
         <div className="cart">

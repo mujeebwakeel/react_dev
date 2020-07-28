@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { clearProduct } from "../actions/productActions";
-import { listPurchase } from "../actions/cartActions";
+import { listPurchase } from "../actions/purchaseAcions";
 
-function SoldGoodsScreen(props) {
+function SoldItemsScreen(props) {
     
-    const cart = useSelector(state => state.cart);
-    const {soldout} = cart;
+    const purchaseList = useSelector(state => state.purchaseList);
+    const {soldout} = purchaseList;
     const productClear = useSelector(state => state.productClear);
     const {success} = productClear;
     const userSignin = useSelector(state => state.userSignin);
@@ -20,7 +20,7 @@ function SoldGoodsScreen(props) {
         return() => {
             //
         };
-    }, [success]);
+    }, [success,dispatch]);
 
     const clearHandler = (product) => {
         dispatch(clearProduct(product._id));
@@ -57,7 +57,7 @@ function SoldGoodsScreen(props) {
                                     <td>{product.order_amount}</td>
                                     <td>{product.item_number}</td>
                                     <td>
-                                        <button onClick={() => clearHandler(product)}>Pending</button>
+                                        <button disabled={product.cleared} onClick={() => clearHandler(product)}>{product.cleared? "cleared" : "Pending"}</button>
                                     </td>
                                 </tr>
                                 )}
@@ -71,5 +71,5 @@ function SoldGoodsScreen(props) {
         )
 } 
 
-export default SoldGoodsScreen;
+export default SoldItemsScreen;
 

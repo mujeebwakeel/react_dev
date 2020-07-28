@@ -12,7 +12,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import SoldGoodsScreen from './screens/SoldGoodsScreen';
+import SoldItemsScreen from './screens/SoldGoodsScreen';
 
 function App() {
 const userSignin = useSelector(state => state.userSignin);
@@ -40,6 +40,7 @@ const {userInfo} = userSignin;
         			<div className="header-links">
 						<Link to='/cart'>Cart</Link>
 						{userInfo && userInfo.isAdmin && <Link to="/products">Create-Product</Link>}
+						{userInfo && userInfo.isAdmin && <Link to="/sold">Sales Summary</Link>}
 						{userInfo? <Link to="/profile">{userInfo.name}</Link>:
 						<Link to='/signin'>Sign In</Link> 
   						}
@@ -48,7 +49,7 @@ const {userInfo} = userSignin;
         
         		<main className="main">
         			<div className="content">
-					<Route path="/sold" component= {SoldGoodsScreen} />
+					<Route path="/sold" component= {SoldItemsScreen} />
 					<Route path="/products" component= {ProductsScreen} />
 					<Route path="/shipping" component= {ShippingScreen} />
 					<Route path="/payment" component= {PaymentScreen} />

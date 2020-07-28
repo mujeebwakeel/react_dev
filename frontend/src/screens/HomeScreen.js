@@ -15,11 +15,11 @@ function HomeScreen (props) {
 		return () => { 
 			//
 		};  
-	}, [searchItem]);
+	}, [searchItem,dispatch]);
 
     return (
 		loading? <div>Loading...</div> :
-		error? <div>{error}</div> :
+		error? <div className="error-message">{error}</div> :
         <ul className="products">
     		{ products.length === 0? <div>Product is out of stock</div>:
     		  products.map(product => 
@@ -28,8 +28,8 @@ function HomeScreen (props) {
       				<Link to={'/product/' + product._id}><img className="product-image" src={product.image} alt="" /></Link>
     						<div className="product-name"><Link to={'/product/' + product._id}>{product.name}</Link></div>
       						<div className="product-brand">{product.brand}</div>
-      						  <div className="product-price">$ {product.price}</div>
-      						  <div className="product-rating"> {product.rating} stars ({product.numReviews} Reviews) </div>
+      						<div className="product-price">$ {product.price}</div>
+      						<div className="product-rating"> {product.rating} stars ({product.numReviews} Reviews) </div>
       				</div>
     			</li>
     		  )

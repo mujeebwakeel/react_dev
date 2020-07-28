@@ -14,7 +14,11 @@ function PlaceOrderScreen(props) {
     const userSignin = useSelector(state => state.userSignin);
     const {userInfo} = userSignin;
     const cart = useSelector(state => state.cart);
-    const {cartItems, shipping, payment} = cart;
+    const {cartItems} = cart;
+    const shippingCart = useSelector(state => state.shipping);
+    const {shipping} = shippingCart;
+    const paymentCart = useSelector(state => state.payment);
+    const {payment} = paymentCart;
     if(!shipping.address){
         props.history.push("/shipping"); 
     } else if(!payment.paymentMethod) {
@@ -29,7 +33,8 @@ function PlaceOrderScreen(props) {
             customer_email: userInfo.email,
             order_amount: totalPrice,
             item_number: itemNumber,
-            items: cartItems
+            items: cartItems,
+            shipping: shipping
            }
         dispatch(purchasedItem(details));
         props.history.push("/");
@@ -44,6 +49,7 @@ function PlaceOrderScreen(props) {
 
     
 useEffect(() => {
+    if(window.paypal) {
     window.paypal
          .Buttons({
              createOrder: (data, actions) => {
@@ -65,10 +71,10 @@ useEffect(() => {
              },
              onError: err => {
                  setError(true);
-                 console.error(err); 
+                 console.log(err); 
              }
          }).render(paypalRef.current)
-    
+    }
 }, [totalPrice] );
 
     if(paidFor) {
@@ -97,7 +103,7 @@ useEffect(() => {
                     <li>
                         <div>Shipping address:</div>
                         <div className="shipping-address">
-                            {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
+                            {shipping.address}, {shipping.city}, {shipping.postalCode}, {shipping.country}
                         </div>
                     </li> 
                     <li>
@@ -139,13 +145,13 @@ useEffect(() => {
                     <div>
                         <h3>Shipping Address</h3>
                         <div>
-                            {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
+                            {shipping.address}, {shipping.city}, {shipping.postalCode}, {shipping.country}
                         </div>
                     </div>
                     <div>
                         <h3>Payment</h3>
                         <div>
-                            Payment Method: {cart.payment.paymentMethod}
+                            Payment Method: {payment.paymentMethod}
                         </div>
                     </div>
                     <div>
@@ -182,9 +188,16 @@ useEffect(() => {
                 </div>
                 <div className="placeorder-action">
                     <ul>
-                        <li className="proceed-to-placeorder">
-                            <div ref={paypalRef}></div>
-                        </li>
+                        { 
+                            (window.paypal)?
+                            <li className="proceed-to-placeorder">
+                                <div ref={paypalRef}></div>
+                            </li>   
+                            :
+                            <li className="proceed-to-placeorder">
+                                <div>You are not connected</div>
+                            </li>   
+                        }
                         <li>
                             <h3>Order Summary</h3>
                         </li>
