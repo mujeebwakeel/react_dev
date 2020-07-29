@@ -10,7 +10,7 @@ import productRoute from "./routes/productRoute"
 dotenv.config();
 
 const mongodbUrl = config.MONGODB_URL;
-mongoose.connect(mongodbUrl, {
+mongoose.connect("mongodb://localhost/whykay", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
