@@ -9,6 +9,7 @@ function CartScreen(props) {
     const {cartItems} = cart;
     const productId = props.match.params.id;
     const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
+    const totalAmount = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const dispatch = useDispatch();
     const handleOnClick = (productId) => {
         dispatch(removeFromCart(productId));
@@ -26,7 +27,7 @@ const checkoutHandler = () => {
 
     if(!cartItems) {
         return (
-            <div>Kindly reload the browser to see the just checkedout items </div>
+            <div className="error-message">Kindly reload the browser to see the just checkedout items </div>
         )
     }
 
@@ -73,7 +74,7 @@ const checkoutHandler = () => {
                 <h3>
                     Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
                     :
-                    $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                    $ {+totalAmount.toFixed(2)}
                 </h3>
                 <li className="proceed-to-checkout">
                     <button  onClick={checkoutHandler}  className="proceed-to-checkout-button" disabled={cartItems.length === 0}>

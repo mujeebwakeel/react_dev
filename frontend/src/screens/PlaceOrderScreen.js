@@ -129,7 +129,7 @@ useEffect(() => {
 
     if(error) {
         return (
-                    <div>
+                    <div className="error-message">
                         Error in processing payment. Please try again
                     </div>        
                     

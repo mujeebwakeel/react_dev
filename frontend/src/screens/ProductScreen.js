@@ -25,8 +25,8 @@ function ProductScreen(props) {
         <div className="back-to-result">
             <Link to = "/"> Back to result</Link>
         </div>
-        { loading? <div>Loading...</div> :
-         error? <div>{error}</div> :
+        { loading? <div className="error-message">Loading...</div> :
+         error? <div className="error-message">{error}</div> :
         (
             <div className="details">
         <div className="details-image">
@@ -41,7 +41,11 @@ function ProductScreen(props) {
                     {product.brand}
                 </li>
                 <li>
-                    {product.rating} Stars ({product.numReviews} Reviews)
+                    <div className="product-rating">
+                            <span className="stars-outer">
+                                <span style={{width: (product.rating/5)*100 +"%"}} className="stars-inner"></span>
+                            </span>
+                    </div>
                 </li>
                 <li>
                     Price:

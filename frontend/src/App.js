@@ -83,7 +83,7 @@ const {userInfo} = userSignin;
 								<Link to="/?search=Watch" onClick={closeMenu}>Wrist-watches</Link>
         					</li>
 							<li>
-								<Link to="/?search=Sander" onClick={closeMenu}>Sanders</Link>
+								<Link to="/?search=Sneaker" onClick={closeMenu}>Sneakers</Link>
         					</li>
 							<li>
 								<Link to="/?search=Belt" onClick={closeMenu}>Belts</Link>

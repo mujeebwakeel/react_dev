@@ -16,12 +16,15 @@
     "@babel/node": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7"
   },
   "scripts": {
+    "frontend-install": "npm install --prefix frontend",
     "start": "concurrently \"npm run server\" \"npm run frontend\"",
     "server": "nodemon --watch backend --exec babel-node backend/server.js",
-    "frontend": "npm start --prefix frontend"
+    "frontend": "npm start --prefix frontend",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend  && npm run build --prefix frontend"
   },
   "author": "",
   "license": "ISC"

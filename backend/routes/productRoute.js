@@ -69,6 +69,7 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
         product.brand = req.body.brand;
         product.countInStock = req.body.countInStock;
         product.description = req.body.description;
+        product.rating = req.body.rating;
         
         product.save((err,foundProduct) => {
             if(err) {

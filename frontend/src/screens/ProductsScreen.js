@@ -10,6 +10,7 @@ function ProductsScreen(props) {
     const [image, setImage] = useState("");
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
+    const [rating, setRating] = useState("");
     const [description, setDescription] = useState("");
     const [countInStock, setCountInStock] = useState("");
     const productList = useSelector(state => state.productList);
@@ -44,12 +45,13 @@ function ProductsScreen(props) {
         setDescription(product.description);
         setCountInStock(product.countInStock);
         setImage(product.image);
+        setRating(product.rating)
 
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(saveProduct({_id:id,name,price,brand,description,category,image,countInStock}));
+        dispatch(saveProduct({_id:id,name,price,brand,description,category,image,countInStock,rating}));
     }
 
     const deleteHandler = (product) => {
@@ -93,6 +95,10 @@ function ProductsScreen(props) {
                             <li>
                                 <label htmlFor="category">Category*</label>
                                 <input type="text" name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)}></input>
+                            </li>
+                            <li>
+                                <label htmlFor="rating">Rating*</label>
+                                <input type="Number" name="rating" id="rating" value={rating} onChange={(e) => setRating(e.target.value)}></input>
                             </li>
                             <li>
                                 <label htmlFor="countInStock">countInStock*</label>
