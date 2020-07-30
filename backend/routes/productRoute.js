@@ -97,7 +97,7 @@ router.post("/purchase", isAuth, async (req, res) => {
         order_amount: req.body.order_amount,
         item_number: req.body.item_number,
         shipping: req.body.shipping
-    });
+    }); 
 
     const items = req.body.items;
     items.forEach(function(item) {

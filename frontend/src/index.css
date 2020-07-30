@@ -56,6 +56,26 @@ a:hover {
 	color: #ff0000;
 }
 
+a.cart-text {
+	position: relative;
+  }
+
+.cart-text-format {
+	padding-right: .9rem;
+}
+  
+span.num {
+	position: absolute;
+	font-size: 0.7em;
+	top: .5px;
+	right: 2px;
+	color:#fff;
+	border-radius: 50%;
+	background-color: red;
+	width: .9em;
+	text-align: center;
+  }
+
 .main {
 	grid-area: main;
 }
@@ -521,7 +541,7 @@ tbody>tr:nth-child(even) {
 	font-weight: bold;
 }
 
-.proceed-to-placeorder {
+.proceed-to-placeorder,.proceed-to-placeorder.button  {
 	display: flex;
 	flex-direction: column;
 }
@@ -616,4 +636,8 @@ tbody>tr:nth-child(even) {
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
 	color:#f8ce0b;
+}
+
+.error-message{
+	margin: 1rem;
 }

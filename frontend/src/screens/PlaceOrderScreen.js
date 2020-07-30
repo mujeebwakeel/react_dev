@@ -194,8 +194,8 @@ useEffect(() => {
                                 <div ref={paypalRef}></div>
                             </li>   
                             :
-                            <li className="proceed-to-placeorder">
-                                <div>You are not connected</div>
+                            <li className="proceed-to-checkout">
+                                <button disabled="true"  className="proceed-to-checkout-button" type="button">You are not connected to Paypal</button>
                             </li>   
                         }
                         <li>

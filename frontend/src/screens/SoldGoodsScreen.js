@@ -36,6 +36,7 @@ function SoldItemsScreen(props) {
                                     <th>Buyer_email</th>
                                     <th>Order_time</th>
                                     <th>Item(s)</th>
+                                    <th>Buyer_Address</th>
                                     <th>Order_id</th>
                                     <th>Order_amount</th>
                                     <th>Total Quantity</th>
@@ -52,6 +53,14 @@ function SoldItemsScreen(props) {
                                                 <li>{item.name} : {item.qty} piece(s)</li>
                                             </ul>)
                                         }
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>{product.shipping.address}</li>
+                                            <li>{product.shipping.city}</li>
+                                            <li>{product.shipping.postalCode}</li>
+                                            <li>{product.shipping.country}</li>
+                                        </ul>
                                     </td>
                                     <td>{product.order_id}</td>
                                     <td>{product.order_amount}</td>

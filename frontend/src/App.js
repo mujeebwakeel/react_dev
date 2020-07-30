@@ -17,6 +17,8 @@ import SoldItemsScreen from './screens/SoldGoodsScreen';
 function App() {
 const userSignin = useSelector(state => state.userSignin);
 const {userInfo} = userSignin;
+const cart = useSelector(state => state.cart);
+const {cartItems} = cart;
   
 	const openMenu = () => {
 		document.querySelector(".sidebar").classList.add("open");
@@ -38,7 +40,7 @@ const {userInfo} = userSignin;
         				<Link to = "/">Whykay</Link>
         			</div>
         			<div className="header-links">
-						<Link to='/cart'>Cart</Link>
+						<Link  className="cart-text" to='/cart'><span className="cart-text-format">Cart</span> <span className="num">{cartItems.length}</span></Link>
 						{userInfo && userInfo.isAdmin && <Link to="/products">Create-Product</Link>}
 						{userInfo && userInfo.isAdmin && <Link to="/sold">Sales Summary</Link>}
 						{userInfo? <Link to="/profile">{userInfo.name}</Link>:
