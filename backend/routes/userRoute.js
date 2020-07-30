@@ -79,24 +79,6 @@ router.get("/allusers", async (req, res) => {
     })
 });
     
-router.get("/createadmin", async (req,res) =>{
-    const user = new User({
-        name: "Yhinkus",
-        email: "wakeelmujeeb@yahoo.com",
-        password:"kaywhy",
-        rePassword:"kaywhy",
-        description: "I am someone who was born to succeed, add values to others and make them see the world in good ways",
-        isAdmin: true
-    });
-    user.save((err, newUser) => {
-        if(err) {
-            return res.status(401).send({msg: "Invalid User Data"});
-        } else {
-            res.send(newUser);
-        }
-    });
-});
-
-    
+   
 
 export default router;

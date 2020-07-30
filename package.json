@@ -25,7 +25,8 @@
     "start": "npm run build && node ./build/server",
     "build": "npm run clean && npm run babel-build",
     "babel-build": "babel -d ./build ./backend -s",
-    "clean": "mkdir build"
+    "clean": "mkdir build",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "author": "",
   "license": "ISC"
