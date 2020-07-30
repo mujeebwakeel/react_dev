@@ -21,13 +21,20 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 
+app.get("*", function(req,res) {
+        res.send(express.static(path.join(__dirname, '..frontend/build/index.html')))
+    });
+
 if(process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, 'frontend/build')));
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
     app.get("*", function(req,res) {
-        res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'))
+        res.send(express.static(path.join(__dirname, '..frontend/build/index.html')))
     });
 }
 
