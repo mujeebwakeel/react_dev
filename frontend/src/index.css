@@ -26,6 +26,7 @@ body {
 	background-color: #203040;
 	color: #ffffff;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	padding: .5rem;
@@ -79,6 +80,16 @@ span.num {
 .main {
 	grid-area: main;
 }
+
+.main .content {
+	height: 100%;
+}
+
+.loading {
+	height: 100%;
+}
+
+
 
 .footer {
 	grid-area: footer;
@@ -163,6 +174,11 @@ span.num {
 	height: 100%;
 	background-color: #f0f0f0;
 	padding: .5rem;
+}
+
+.sidebar li {
+	padding-bottom: .2rem;
+	border-bottom: .1rem gray solid;
 }
 
 .sidebar-open-button {
@@ -640,4 +656,38 @@ tbody>tr:nth-child(even) {
 
 .error-message{
 	margin: 1rem;
+}
+
+
+
+.loading-screen {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	text-align: center;
+	font-size: 2rem;
+	font-family: cursive;
+	background: #70e1f5;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	height: 100%;
+
+}
+
+.loading-screen h1, h2, h4 {
+	margin-bottom: 1.5rem;
+}
+
+
+.loading-screen h1 {
+	color: #9cf000;
+}
+
+.loading-screen h2 {
+	color: #e930bb;
+}
+
+.loading-screen h4 {
+	color: #f83f58
 }

@@ -1,4 +1,5 @@
 import express from "express"
+import history from "connect-history-api-fallback";
 import dotenv from "dotenv";
 import config from "./config";
 import mongoose from "mongoose"
@@ -17,6 +18,7 @@ mongoose.connect(mongodbUrl, {
 }).catch(error => console.log(error.message));
 
 const app = express();
+app.use(history());
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
@@ -28,13 +30,13 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 
 app.get("*", function(req,res) {
-        res.send(express.static(path.join(__dirname, '..frontend/build/index.html')))
+        res.send(express.static(path.join(__dirname, '../frontend/build/index.html')))
     });
 
 if(process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, '../frontend/build')));
     app.get("*", function(req,res) {
-        res.send(express.static(path.join(__dirname, '..frontend/build/index.html')))
+        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
     });
 }
 

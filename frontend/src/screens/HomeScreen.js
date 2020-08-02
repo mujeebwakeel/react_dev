@@ -2,6 +2,7 @@ import React, {useEffect} from "react"
 import {Link} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../actions/productActions";
+import { LoadingScreen } from "./LoadingScreen";
 
 function HomeScreen (props) {
 	const productList = useSelector(state => state.productList);
@@ -18,7 +19,8 @@ function HomeScreen (props) {
 	}, [searchItem,dispatch]);
 
     return (
-		loading? <div>Loading...</div> :
+
+		loading? <div className="loading"><LoadingScreen /></div> :
 		error? <div className="error-message">{error}</div> :
         <ul className="products">
     		{ products.length === 0? <div>Product is out of stock</div>:
