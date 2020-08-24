@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import {Link} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { detailsProduct } from "../actions/productActions";
-import { LoadingScreen } from "./LoadingScreen";
 
 function ProductScreen(props) {
     const [qty, setQty] = useState(1);
@@ -26,7 +25,9 @@ function ProductScreen(props) {
         <div className="back-to-result">
             <Link to = "/"> Back to result</Link>
         </div>
-        { loading? <div className="loading"><LoadingScreen /></div> :
+        { loading? <div class="text-center">
+					<span class="spinner-border" role="status" aria-hidden="true"></span> <span >Loading...</span>
+	  			</div> :
          error? <div className="error-message">{error}</div> :
         (
             <div className="details">

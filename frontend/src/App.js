@@ -6,20 +6,24 @@ import ProductScreen from "./screens/ProductScreen"
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from "./screens/RegisterScreen"
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ProductsScreen from './screens/ProductsScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SoldItemsScreen from './screens/SoldGoodsScreen';
+import { signout } from './actions/userActions';
+import Cookie from "js-cookie"
 
-function App() {
-const userSignin = useSelector(state => state.userSignin);
-const {userInfo} = userSignin;
-const cart = useSelector(state => state.cart);
-const {cartItems} = cart;
-  
+function App(props) {
+	const userSignin = useSelector(state => state.userSignin);
+	const {userInfo} = userSignin;
+	const cart = useSelector(state => state.cart);
+	const {cartItems} = cart;
+
+	const dispatch = useDispatch();
+
 	const openMenu = () => {
 		document.querySelector(".sidebar").classList.add("open");
 	}
@@ -28,7 +32,19 @@ const {cartItems} = cart;
 		document.querySelector(".sidebar").classList.remove("open");
 	}
   
-   	
+	const handleTerms = () => {
+        document.querySelector(".terms").classList.toggle("edit");
+    }
+	
+	const handleContactUs = () => {
+		alert("Reach out to us via wakeelmujeeb@gmail.com")
+	}
+
+	const handleSignout = () => {
+		Cookie.remove("userInfo"); 
+		window.location.reload();
+    }	
+
   return (
     <BrowserRouter>
         <div className="grid-container">
@@ -40,10 +56,10 @@ const {cartItems} = cart;
         				<Link to = "/">Whykay</Link>
         			</div>
         			<div className="header-links">
-						<Link  className="cart-text" to='/cart'><span className="cart-text-format">Cart</span> <span className="num">{cartItems.length}</span></Link>
+						<Link  className="cart-text" to='/cart'><span className="cart-text-format">Cart</span> {cartItems.length>0 ? <span className="num">{cartItems.length}</span> : <span className="none"></span>}</Link>
 						{userInfo && userInfo.isAdmin && <Link to="/products">Create-Product</Link>}
 						{userInfo && userInfo.isAdmin && <Link to="/sold">Sales Summary</Link>}
-						{userInfo? <Link to="/profile">{userInfo.name}</Link>:
+						{userInfo? <span><Link to="/profile">{userInfo.name}</Link> <button className="sign-out" onClick={handleSignout}>Sign Out</button></span> :
 						<Link to='/signin'>Sign In</Link> 
   						}
         			</div>
@@ -104,9 +120,12 @@ const {cartItems} = cart;
         					</li>
         				</ul>
         		</aside>
-        
+				<div  className="terms">We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
+						and we shall not be liable to any network related isuues you encounter browing this site. You also agree
+						that any payment made on this site shall not be refunded. Thank you.
+				</div>
         		<footer className="footer">
-        				Powered By Whykay
+					<span className="terms-toggle" style={{cursor: "pointer"}} onClick={handleTerms}>Terms</span> <span>&#169;2020 Adeyinka</span> <span>Whykay&#8482;</span> <span style={{cursor: "pointer"}} onClick={handleContactUs}>Contact</span>
         		</footer>
     	</div>
     </BrowserRouter>

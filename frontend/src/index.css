@@ -15,9 +15,9 @@ body {
 
 .grid-container {
 	display: grid;
-	grid-template-areas: "header" "main" "footer";
+	grid-template-areas: "header" "main" "div" "footer";
 	grid-template-columns: 1fr;
-	grid-template-rows: 5rem 1fr 5rem;
+	grid-template-rows: 5rem 1fr 5rem 5rem;
 	height: 100%;
 }
 
@@ -77,8 +77,27 @@ span.num {
 	text-align: center;
   }
 
+  span.none {
+	position: absolute;
+	font-size: 0.7em;
+	top: .5px;
+	right: 2px;
+	color:#fff;
+	border-radius: 50%;
+	width: .9em;
+	text-align: center;
+  }
+
 .main {
 	grid-area: main;
+}
+
+.terms {
+	grid-area: div;
+	background-color: rgb(247, 46, 11);
+	color: white;
+	padding: .5rem 2rem;
+	display: none;
 }
 
 .main .content {
@@ -89,8 +108,6 @@ span.num {
 	height: 100%;
 }
 
-
-
 .footer {
 	grid-area: footer;
 	background-color: #203040;
@@ -98,6 +115,15 @@ span.num {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.footer>span {
+	margin-right: 2.2rem;
+}
+
+.footer>span>a {
+	color: white;
+	margin-right: 0;
 }
 
 .product-image {
@@ -563,11 +589,12 @@ tbody>tr:nth-child(even) {
 }
 
 .profile {
-	width: 40rem;
+	width: 35rem;
 	margin: 3rem auto;
 	border: .2rem #f8ae3f solid;
 	border-radius: .5rem;
 	padding: .5rem;
+	background-color: beige;
 }
 
 .profile>li {
@@ -658,36 +685,16 @@ tbody>tr:nth-child(even) {
 	margin: 1rem;
 }
 
-
-
-.loading-screen {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 1rem;
-	text-align: center;
-	font-size: 2rem;
-	font-family: cursive;
-	background: #70e1f5;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	height: 100%;
-
+.text-center {
+	margin-top: 40vh;
 }
 
-.loading-screen h1, h2, h4 {
-	margin-bottom: 1.5rem;
+.sign-out {
+	border: none;
+	background: none;
+	color: white;
 }
 
-
-.loading-screen h1 {
-	color: #9cf000;
-}
-
-.loading-screen h2 {
-	color: #e930bb;
-}
-
-.loading-screen h4 {
-	color: #f83f58
+.sign-out:hover {
+	color: red;
 }

@@ -30,7 +30,7 @@ router.post("/register", async (req,res) =>{
 });
 
 router.put("/register/:id", isAuth, async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id); 
         user.name = req.body.name;
         user.email = req.body.email;
         user.description = req.body.description;

@@ -11,12 +11,13 @@ function ProfileScreen(props) {
     const [description, setDescription] = useState("");
     const userRegister = useSelector(state => state.userRegister);
     const {loading: loadingSave, error:errorSave, success: successSave} = userRegister;
-
+    
     const dispatch = useDispatch();
 
     useEffect  (() => {
         if(successSave) {
             document.querySelector(".editProfile").classList.toggle("edit");
+            window.location.reload();
         }
         return() => {
             //

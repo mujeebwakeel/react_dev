@@ -7,7 +7,7 @@ function ProductsScreen(props) {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [price, setPrice] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState([]);
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
     const [rating, setRating] = useState("");
@@ -58,6 +58,7 @@ function ProductsScreen(props) {
         dispatch(deleteProduct(product));
     }
 
+    
     if(userInfo && userInfo.isAdmin) {
     
     return ( <div className="content content-margined">
@@ -82,7 +83,7 @@ function ProductsScreen(props) {
                             </li>
                             <li>
                                 <label htmlFor="image">Image URL*</label>
-                                <input type="text" name="image" id="image" value={image} onChange={(e) => setImage(e.target.value)}></input>
+                                <input type = "text" name="image" id="image" onChange={(e) => setImage(e.target.value)}></input>
                             </li>
                             <li>
                                 <label htmlFor="price">Price($)*</label>

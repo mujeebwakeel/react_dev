@@ -11,7 +11,7 @@ const userInfo = Cookie.getJSON("userInfo") || null;
 const shipping = Cookie.getJSON("shipping") || {};
 const payment = Cookie.getJSON("payment") || {};
 
-const initialState ={cart: {cartItems}, userSignin: {userInfo}, userRegister: {userInfo}, shipping: {shipping}, payment: {payment} };
+const initialState ={cart: {cartItems}, userSignin: {userInfo}, shipping: {shipping}, payment: {payment} };
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,

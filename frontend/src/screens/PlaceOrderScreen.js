@@ -45,7 +45,7 @@ function PlaceOrderScreen(props) {
     const itemNumber = cartItems.reduce((a, c) => a + c.qty, 0);
     const ShippingPrice = itemsPrice > 100? 70 : 10;
     const taxPrice = 0.15 * itemsPrice;
-    const totalPrice = itemsPrice + ShippingPrice + taxPrice;
+    const totalPrice = (itemsPrice + ShippingPrice + taxPrice).toFixed(2);
 
     
 useEffect(() => {
