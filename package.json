@@ -8,6 +8,7 @@
     "body-parser": "^1.19.0",
     "cloudinary": "^1.22.0",
     "connect-history-api-fallback": "^1.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "devstart": "babel-node ./backend/server",
-    "start": "npm run build && node ./build/server",      
+    "start": "npm run build && node ./build/server",
     "build": "npm run clean && npm run babel-build",
     "babel-build": "babel -d ./build ./backend -s",
     "clean": "rm -rf ./build && mkdir build",

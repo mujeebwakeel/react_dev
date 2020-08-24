@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux"
 import { saveProduct, listProducts, deleteProduct } from "../actions/productActions";
 
@@ -7,7 +8,7 @@ function ProductsScreen(props) {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [price, setPrice] = useState("");
-    const [image, setImage] = useState([]);
+    const [image, setImage] = useState("");
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
     const [rating, setRating] = useState("");
@@ -22,6 +23,9 @@ function ProductsScreen(props) {
     const productDelete = useSelector(state => state.productDelete);
     const { success: successDelete} = productDelete;
     const allItems = "all"; 
+
+    const url = 'https://api.cloudinary.com/v1_1/wakeelmujeeb/image/upload';
+    const preset = 'xcajyfo4';
 
     const dispatch = useDispatch(); 
 
@@ -49,16 +53,30 @@ function ProductsScreen(props) {
 
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        dispatch(saveProduct({_id:id,name,price,brand,description,category,image,countInStock,rating}));
+        if(!id) {
+            const formData = new FormData();
+            formData.append('file', image);
+            formData.append('upload_preset', preset);
+            try {
+            const res = await axios.post(url, formData);
+            const imageUrl = res.data.secure_url;
+            const imageId  = res.data.asset_id;
+            dispatch(saveProduct({_id:id,name,price,brand,description,category,imageUrl,imageId,countInStock,rating}));
+            } catch (err) {
+            console.error(err);
+        }
+        } else {
+            dispatch(saveProduct({_id:id,name,price,brand,description,category,countInStock,rating}));
+        }
     }
 
     const deleteHandler = (product) => {
         dispatch(deleteProduct(product));
     }
 
-    
+        
     if(userInfo && userInfo.isAdmin) {
     
     return ( <div className="content content-margined">
@@ -81,10 +99,12 @@ function ProductsScreen(props) {
                                 <label htmlFor="name">Name*</label>
                                 <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)}></input>
                             </li>
-                            <li>
-                                <label htmlFor="image">Image URL*</label>
-                                <input type = "text" name="image" id="image" onChange={(e) => setImage(e.target.value)}></input>
-                            </li>
+                            { !id &&
+                                <li>
+                                    <label htmlFor="image">Image File*</label>
+                                    <input type = "file" name="image" id="image" onChange={(e) => setImage(e.target.files[0])}></input>
+                                </li>
+                            }    
                             <li>
                                 <label htmlFor="price">Price($)*</label>
                                 <input type="Number" name="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)}></input>

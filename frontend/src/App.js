@@ -35,14 +35,14 @@ function App(props) {
     }
 	
 	const handleContactUs = () => {
-		alert("Reach out to us via wakeelmujeeb@gmail.com")
+        document.querySelector(".contact").classList.toggle("edit");
 	}
 
 	const handleSignout = () => {
 		Cookie.remove("userInfo");
 		Cookie.remove("cartItems");
-		window.location.replace('https://whykay.herokuapp.com'); 
-		window.location.reload();
+		window.location.replace('https://whykay.herokuapp.com/'); 
+		// window.location.reload();
     }	
 
   return (
@@ -120,10 +120,20 @@ function App(props) {
         					</li>
         				</ul>
         		</aside>
-				<div  className="terms">We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
+
+				<div  className="terms">
+					<div className="inner-terms">We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
 						and we shall not be liable to any network related isuues you encounter browing this site. You also agree
 						that any payment made on this site shall not be refunded. Thank you.
+					</div>
 				</div>
+
+				<div className="contact">
+						<div className="inner-contact">
+						  	You can reach us via <a href="mailto:wakeelmujeeb@yahoo.com?subject=Whykay%20Concept">wakeelmujeeb@yahoo.com</a>
+						</div>
+				</div>
+
         		<footer className="footer">
 					<span className="terms-toggle" style={{cursor: "pointer"}} onClick={handleTerms}>Terms</span> <span>&#169;2020 Adeyinka</span> <span>Whykay&#8482;</span> <span style={{cursor: "pointer"}} onClick={handleContactUs}>Contact</span>
         		</footer>

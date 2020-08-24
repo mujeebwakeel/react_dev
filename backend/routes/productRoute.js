@@ -45,7 +45,8 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
         const product = new Product ({
             name: req.body.name,
             price: req.body.price,
-            image: req.body.image,
+            image: req.body.imageUrl,
+            imageId: req.body.imageId,
             category: req.body.category,
             brand: req.body.brand,
             countInStock: req.body.countInStock,
@@ -69,7 +70,6 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
             return res.status(500).send({message: "Error while updating Product"});
         }
         
-        product.image = req.body.image
         product.name = req.body.name;
         product.price = req.body.price;
         product.category = req.body.category;
@@ -78,6 +78,7 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
         product.description = req.body.description;
         product.rating = req.body.rating;
 
+        console.log(product);
         product.save((err,foundProduct) => {
             if(err) {
                 console.log(err);
