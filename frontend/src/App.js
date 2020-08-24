@@ -39,7 +39,9 @@ function App(props) {
 	}
 
 	const handleSignout = () => {
-		Cookie.remove("userInfo"); 
+		Cookie.remove("userInfo");
+		Cookie.remove("cartItems");
+		window.location.replace("/"); 
 		window.location.reload();
     }	
 
