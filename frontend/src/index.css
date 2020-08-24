@@ -96,30 +96,21 @@ span.num {
 	position: fixed;
 	width: 100%;
 	color: #000000;
-	padding: 0 2rem;
+	padding: 1rem;
+	background-color: rgba(250, 250, 250, .8);
 	display: none;
 	text-align: justify;
-}
-
-.inner-terms {
-	background-color: rgba(250, 250, 250, .8);
-	padding: 1rem;
 }
 
 .contact {
 	position: fixed;
 	width: 100%;
 	color: #000000;
-	padding: 0 2rem;
+	padding: 1rem;
+	background-color: rgba(250, 250, 250, .8);
 	display: none;
 	text-align: center;
 }
-
-.inner-contact {
-	background-color: rgba(250, 250, 250, .8);
-	padding: 1rem;
-}
-
 
 .main .content {
 	height: 100%;

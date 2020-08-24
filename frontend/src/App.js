@@ -122,16 +122,13 @@ function App(props) {
         		</aside>
 
 				<div  className="terms">
-					<div className="inner-terms">We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
-						and we shall not be liable to any network related isuues you encounter browing this site. You also agree
-						that any payment made on this site shall not be refunded. Thank you.
-					</div>
+					We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
+					and we shall not be liable to any network related isuues you encounter browing this site. You also agree
+					that any payment made on this site shall not be refunded. Thank you.
 				</div>
 
 				<div className="contact">
-						<div className="inner-contact">
 						  	You can reach us via <a href="mailto:wakeelmujeeb@yahoo.com?subject=Whykay%20Concept">wakeelmujeeb@yahoo.com</a>
-						</div>
 				</div>
 
         		<footer className="footer">
