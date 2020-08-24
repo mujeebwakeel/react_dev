@@ -25,7 +25,7 @@
   },
   "scripts": {
     "devstart": "babel-node ./backend/server",
-    "start": "npm run build && node ./build/server",
+    "start": "npm run build && node ./build/server",      
     "build": "npm run clean && npm run babel-build",
     "babel-build": "babel -d ./build ./backend -s",
     "clean": "rm -rf ./build && mkdir build",
