@@ -13,7 +13,6 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SoldItemsScreen from './screens/SoldGoodsScreen';
-import { signout } from './actions/userActions';
 import Cookie from "js-cookie"
 
 function App(props) {
@@ -22,7 +21,6 @@ function App(props) {
 	const cart = useSelector(state => state.cart);
 	const {cartItems} = cart;
 
-	const dispatch = useDispatch();
 
 	const openMenu = () => {
 		document.querySelector(".sidebar").classList.add("open");
