@@ -96,7 +96,7 @@ span.num {
 	position: fixed;
 	width: 100%;
 	color: #000000;
-	padding: 6rem 2rem;
+	padding: 0 2rem;
 	display: none;
 	text-align: justify;
 }
@@ -110,7 +110,7 @@ span.num {
 	position: fixed;
 	width: 100%;
 	color: #000000;
-	padding: 45vh 2rem;
+	padding: 0 2rem;
 	display: none;
 	text-align: center;
 }
