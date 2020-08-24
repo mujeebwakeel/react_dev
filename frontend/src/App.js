@@ -41,6 +41,8 @@ function App(props) {
 	const handleSignout = () => {
 		Cookie.remove("userInfo");
 		Cookie.remove("cartItems");
+		Cookie.remove("shipping");
+		Cookie.remove("payment");
 		window.location.replace('https://whykay.herokuapp.com/'); 
 		// window.location.reload();
     }	
