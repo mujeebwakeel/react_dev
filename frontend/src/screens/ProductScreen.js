@@ -25,8 +25,8 @@ function ProductScreen(props) {
         <div className="back-to-result">
             <Link to = "/"> Back to result</Link>
         </div>
-        { loading? <div class="text-center">
-					<span class="spinner-border" role="status" aria-hidden="true"></span> <span >Loading...</span>
+        { loading? <div className="text-center">
+					<span className="spinner-border" role="status" aria-hidden="true"></span> <span >Loading...</span>
 	  			</div> :
          error? <div className="error-message">{error}</div> :
         (
