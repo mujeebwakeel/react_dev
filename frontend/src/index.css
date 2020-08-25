@@ -212,6 +212,7 @@ span.num {
 	height: 100%;
 	background-color: #f0f0f0;
 	padding: .5rem;
+	overflow-y: scroll;
 }
 
 .sidebar li {
@@ -239,7 +240,7 @@ span.num {
 	padding-top: 0.25rem;
 	position: absolute;
 	right: .5rem;
-	top: 1.7rem;
+	top: .3rem;
 	outline: none;
 	background-color: #ffffff;
 }

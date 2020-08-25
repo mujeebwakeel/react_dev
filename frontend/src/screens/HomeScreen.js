@@ -19,7 +19,7 @@ function HomeScreen (props) {
 
     return (
 
-		loading? <div class="text-center">
+		loading? <div className="text-center">
 					<span className="spinner-border" role="status" aria-hidden="true"></span> <span >Loading...</span>
 	  			</div> :
 		error? <div className="error-message">{error}</div> :
