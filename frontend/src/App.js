@@ -55,7 +55,7 @@ function App(props) {
         				<button className="sidebar-open-button" onClick={openMenu}>
         					&#9776;
         				</button>
-        				<Link to = "/">Whykay</Link>
+        				<Link to = "/">Whykay</Link> 
         			</div>
         			<div className="header-links">
 						<Link  className="cart-text" to='/cart'><span className="cart-text-format">Cart</span> {cartItems.length>0 ? <span className="num">{cartItems.length}</span> : <span className="none"></span>}</Link>
@@ -124,13 +124,17 @@ function App(props) {
         		</aside>
 
 				<div  className="terms">
-					We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
-					and we shall not be liable to any network related isuues you encounter browing this site. You also agree
-					that any payment made on this site shall not be refunded. Thank you.
+					<div>
+						We use cookies to save your registered information for easy user navigation on this site. By continuing to browse this site you agree that any data submitted by you can be saved into our database,
+						and we shall not be liable to any network related isuues you encounter browing this site. You also agree
+						that any payment made on this site shall not be refunded. Thank you.
+					</div>
+					<button className="close-term"onClick={handleTerms}>close</button>
 				</div>
 
 				<div className="contact">
-						  	You can reach us via <a href="mailto:wakeelmujeeb@yahoo.com?subject=Whykay%20Concept">wakeelmujeeb@yahoo.com</a>
+						  	<div>You can reach us via <a href="mailto:wakeelmujeeb@yahoo.com?subject=Whykay%20Concept">wakeelmujeeb@yahoo.com</a></div>
+							<button className="close-term"onClick={handleContactUs}>close</button>
 				</div>
 
         		<footer className="footer">

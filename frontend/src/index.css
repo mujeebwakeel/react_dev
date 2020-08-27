@@ -99,7 +99,17 @@ span.num {
 	padding: 1rem;
 	background-color: rgba(250, 250, 250, .8);
 	display: none;
-	text-align: justify;
+	text-align: center;
+}
+
+.close-term {
+	cursor: pointer;
+	background: red;
+	color: white;
+	margin: .5rem auto;
+	border: none;
+	outline: none;
+	border-radius: 10px;
 }
 
 .contact {
