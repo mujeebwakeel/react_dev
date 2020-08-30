@@ -39,7 +39,7 @@ const checkoutHandler = () => {
                         <div className="shopping-cart">Shopping Cart</div>
                         <div>Price</div>
                     </li>
-                    {
+                    { 
                         cartItems.length === 0?
                         <div>Cart is empty</div>
                         :
