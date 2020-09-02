@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { register } from "../actions/userActions";
 
 function RegisterScreen(props) {
+    const [warning, setWarning] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -25,7 +26,11 @@ function RegisterScreen(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(register({name,email,password,description,rePassword}));
+        if(password === rePassword) {
+            dispatch(register({name,email,password,description,rePassword}));
+        } else {
+            setWarning("Passwords do not match"); 
+        }
     }
     
     return ( 
@@ -38,26 +43,27 @@ function RegisterScreen(props) {
                     <li>
                         {loading && <div>Loading...</div>}
                         {error && <div>{error}</div>}
+                        {warning && <div>{warning}</div>}
                     </li>
                     <li>
                         <label htmlFor="name">Name*</label>
-                        <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}></input>
+                        <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)} required="true"></input>
                     </li>
                     <li>
                         <label htmlFor="email">Email*</label>
-                        <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}></input>
+                        <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} required="true"></input>
                     </li>
                     <li>
                         <label htmlFor="password">Password*</label>
-                        <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)}></input>
+                        <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} required="true"></input>
                     </li>
                     <li>
                         <label htmlFor="rePassword">re-Enter Password*</label>
-                        <input type="password" name="rePassword" id="rePassword" onChange={(e) => setRePassword(e.target.value)}></input>
+                        <input type="password" name="rePassword" id="rePassword" onChange={(e) => setRePassword(e.target.value)} required="true"></input>
                     </li>
                     <li>
                         <label htmlFor="description">Description of yourself*</label>
-                        <textarea type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)}></textarea> 
+                        <textarea type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)} required="true"></textarea> 
                     </li>
                     <li>
                         <button type="submit" className="button primary">Register</button>

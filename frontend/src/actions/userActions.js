@@ -29,7 +29,7 @@ const register = (user) => async (dispatch, getState) => {
             const {data} = await Axios.post("/api/users/register", user);
             dispatch({type: USER_REGISTER_SUCCESS, payload:data});        }
     } catch (error) {
-        dispatch({type: USER_REGISTER_FAIL, payload:"Ensure all fields are filled"});
+        dispatch({type: USER_REGISTER_FAIL, payload:"Ensure the email you are using has not been used for registration initially."});
     }
 }
 
