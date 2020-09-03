@@ -27,6 +27,7 @@ function RegisterScreen(props) {
     const submitHandler = (e) => {
         e.preventDefault();
         if(password === rePassword) {
+            setWarning(""); 
             dispatch(register({name,email,password,description,rePassword}));
         } else {
             setWarning("Passwords do not match"); 
