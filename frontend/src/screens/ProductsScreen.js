@@ -26,7 +26,7 @@ function ProductsScreen(props) {
 
     const url = 'https://api.cloudinary.com/v1_1/wakeelmujeeb/image/upload';
     const preset = 'xcajyfo4';
-
+ 
     const dispatch = useDispatch(); 
 
     useEffect  (() => {
@@ -57,7 +57,7 @@ function ProductsScreen(props) {
         e.preventDefault();
         if(!id) {
             const formData = new FormData();
-            formData.append('file', image);
+            formData.append('file', image); 
             formData.append('upload_preset', preset);
             try {
             const res = await axios.post(url, formData);
